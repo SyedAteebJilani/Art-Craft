@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art & Craft | Luxury Gifting & Custom Hampers</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: {
+                            50: '#fdfbfb',
+                            100: '#f9f1f1',
+                            200: '#f3e4e4',
+                            300: '#ecd1d1',
+                            400: '#e0b5b5',
+                            500: '#d09191',
+                            DEFAULT: '#ecd1d1', // Main brand color
+                        },
+                        cream: '#faf9f8',
+                        gold: '#c5a059',
+                        charcoal: '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #faf9f8;
+            color: #333333;
+            overflow-x: hidden;
+        }
+
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #faf9f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ecd1d1;
+            border-radius: 10px;
+        }
+
+        /* Image Hover Zoom */
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.7s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Form File Input Styling */
+        input[type="file"]::file-selector-button {
+            border: 1px solid #ecd1d1;
+            background: #fdfbfb;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            margin-right: 1rem;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #ecd1d1;
+            color: #333;
+        }
+
+        /* Marquee Wrapper */
+        .marquee-wrapper {
+            display: flex;
+            width: 200%;
+        }
+
+        /* Smooth reveal class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blush-300 selection:text-white">
+
+    <!-- Marquee Announcement -->
+    <div class="bg-blush-300 text-charcoal text-xs tracking-[0.2em] uppercase py-2.5 overflow-hidden whitespace-nowrap border-b border-blush-400 relative">
+        <div class="marquee-wrapper animate-marquee">
+            <div class="w-1/2 flex justify-around items-center">
+                <span>Custom Gifts for Every Occasion ✨</span>
+                <span>Premium Gift Boxes ✨</span>
+                <span>Elegant Bouquets ✨</span>
+                <span>Luxury Hampers ✨</span>
+                <span>Personalized Gifts ✨</span>
+            </div>
+            <div class="w-1/2 flex justify-around items-center">
+                <span>Custom Gifts for Every Occasion ✨</span>
+                <span>Premium Gift Boxes ✨</span>
+                <span>Elegant Bouquets ✨</span>
+                <span>Luxury Hampers ✨</span>
+                <span>Personalized Gifts ✨</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-blush-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Mobile Menu Button -->
+            <button class="lg:hidden text-charcoal focus:outline-none" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="#" class="font-serif text-2xl md:text-3xl font-medium tracking-wide text-charcoal text-center flex-grow lg:flex-grow-0">
+                Art & Craft
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex space-x-10 items-center text-sm tracking-widest uppercase font-light text-gray-600">
+                <a href="#" class="hover:text-gold transition-colors duration-300">Home</a>
+                <a href="#shop" class="hover:text-gold transition-colors duration-300">Shop</a>
+                <a href="#categories" class="hover:text-gold transition-colors duration-300">Categories</a>
+                <a href="#custom-order" class="hover:text-gold transition-colors duration-300">Custom Orders</a>
+                <a href="#testimonials" class="hover:text-gold transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="hover:text-gold transition-colors duration-300">Contact</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-4 text-charcoal">
+                <button class="hover:text-gold transition-colors hidden sm:block"><i data-lucide="search" class="w-5 h-5"></i></button>
+                <button class="hover:text-gold transition-colors"><i data-lucide="shopping-bag" class="w-5 h-5"></i></button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="lg:hidden absolute top-full left-0 w-full bg-cream border-b border-blush-200 hidden shadow-xl" id="mobile-menu">
+            <div class="flex flex-col px-6 py-6 space-y-6 text-center text-sm tracking-widest uppercase font-light text-gray-700">
+                <a href="#" class="mobile-link hover:text-gold transition-colors">Home</a>
+                <a href="#shop" class="mobile-link hover:text-gold transition-colors">Shop</a>
+                <a href="#categories" class="mobile-link hover:text-gold transition-colors">Categories</a>
+                <a href="#custom-order" class="mobile-link hover:text-gold transition-colors">Custom Orders</a>
+                <a href="#testimonials" class="mobile-link hover:text-gold transition-colors">Testimonials</a>
+                <a href="#contact" class="mobile-link hover:text-gold transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-blush-50">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="images/img4.jpg" 
+                 alt="Luxury Gift Box and Flowers" 
+                 class="w-full h-full object-cover object-center">
+            <!-- Dark Overlay for better contrast (rgba(0,0,0,0.4) equivalent) -->
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto mt-10 animate-fade-up">
+            <span class="block text-sm md:text-base tracking-[0.3em] uppercase text-gold mb-4 font-bold drop-shadow-sm">Elevating the Art of Gifting</span>
+            <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-md">
+                Thoughtful Gifts,<br> Beautifully Curated.
+            </h1>
+            <p class="text-white text-lg md:text-2xl font-semibold tracking-wide leading-[1.6] mb-10 max-w-2xl mx-auto drop-shadow">
+                Discover our premium collection of elegant bouquets, luxury hampers, and personalized gift boxes designed to make every occasion unforgettable.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#shop" class="w-full sm:w-auto px-10 py-4 bg-white text-charcoal text-xs tracking-widest uppercase hover:bg-gold hover:text-white transition-colors duration-500 text-center font-bold shadow-lg rounded-sm">
+                    Shop Collection
+                </a>
+                <a href="#custom-order" class="w-full sm:w-auto px-10 py-4 bg-transparent border-2 border-white text-white text-xs tracking-widest uppercase hover:bg-white hover:text-charcoal transition-all duration-500 text-center font-bold shadow-lg rounded-sm">
+                    Customize Gift
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Categories Section -->
+    <section id="categories" class="py-24 px-6 max-w-7xl mx-auto reveal">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-4xl text-charcoal mb-4">Shop by Category</h2>
+            <div class="w-16 h-px bg-gold mx-auto"></div>
+        </div>
+
+        <!-- MOBILE CONSTRAINT: 2 items per row strictly followed using grid-cols-2 -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            
+            <!-- Category 1 -->
+            <a href="#" class="group block img-hover-zoom relative">
+                <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop" alt="Custom Gifts" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="font-serif text-sm md:text-base text-charcoal group-hover:text-gold transition-colors">Custom Gifts</h3>
+                </div>
+            </a>
+
+            <!-- Category 2 -->
+            <a href="#" class="group block img-hover-zoom relative">
+                <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?q=80&w=600&auto=format&fit=crop" alt="Gift Basket" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="font-serif text-sm md:text-base text-charcoal group-hover:text-gold transition-colors">Gift Basket</h3>
+                </div>
+            </a>
+
+            <!-- Category 3 -->
+            <a href="#" class="group block img-hover-zoom relative">
+                <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=600&auto=format&fit=crop" alt="Bouquets" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="font-serif text-sm md:text-base text-charcoal group-hover:text-gold transition-colors">Bouquets</h3>
+                </div>
+            </a>
+
+            <!-- Category 4 -->
+            <a href="#" class="group block img-hover-zoom relative">
+                <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=600&auto=format&fit=crop" alt="Gift Boxes" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="font-serif text-sm md:text-base text-charcoal group-hover:text-gold transition-colors">Gift Boxes</h3>
+                </div>
+            </a>
+
+            <!-- Category 5 -->
+            <a href="#" class="group block img-hover-zoom relative">
+                <div class="aspect-[4/5] bg-gray-100 overflow-hidden relative">
+                    <img src="./images/img1.jpg" alt="Hampers" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                </div>
+                <div class="mt-4 text-center">
+                    <h3 class="font-serif text-sm md:text-base text-charcoal group-hover:text-gold transition-colors">Hampers</h3>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Best Selling Products Section -->
+    <section id="shop" class="py-24 bg-blush-50 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <span class="block text-xs tracking-widest uppercase text-gold mb-2">Curated With Love</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-charcoal">Best Sellers</h2>
+                </div>
+                <a href="#" class="text-xs tracking-widest uppercase text-charcoal border-b border-charcoal pb-1 hover:text-gold hover:border-gold transition-colors">View All Products</a>
+            </div>
+
+            <!-- MOBILE CONSTRAINT: 2 items per row strictly followed -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10 md:gap-8">
+                
+                <!-- Product 1 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[3/4] overflow-hidden relative mb-4">
+                        <img src="/images/img3.jpg" alt="Premium Blush Rose Box" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <!-- Quick Add Overlay -->
+                        <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <button class="w-full bg-white/90 backdrop-blur text-charcoal text-xs uppercase tracking-widest py-3 hover:bg-charcoal hover:text-white transition-colors">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-sm md:text-base text-charcoal mb-1">Premium Blush Rose Box</h3>
+                        <p class="text-xs text-gray-500 font-light mb-2">Elegant packaging with fresh blooms</p>
+                        <p class="text-sm text-charcoal font-medium">Rs. 8,500</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[3/4] overflow-hidden relative mb-4">
+                        <img src="/images/img4.jpg" alt="Velvet Luxury Hamper" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <button class="w-full bg-white/90 backdrop-blur text-charcoal text-xs uppercase tracking-widest py-3 hover:bg-charcoal hover:text-white transition-colors">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-sm md:text-base text-charcoal mb-1">Velvet Luxury Hamper</h3>
+                        <p class="text-xs text-gray-500 font-light mb-2">Chocolates, perfume, and roses</p>
+                        <p class="text-sm text-charcoal font-medium">Rs. 12,000</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[3/4] overflow-hidden relative mb-4">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?q=80&w=800&auto=format&fit=crop" alt="Bridal Shower Bouquet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <button class="w-full bg-white/90 backdrop-blur text-charcoal text-xs uppercase tracking-widest py-3 hover:bg-charcoal hover:text-white transition-colors">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-sm md:text-base text-charcoal mb-1">Bridal Shower Bouquet</h3>
+                        <p class="text-xs text-gray-500 font-light mb-2">Pastel aesthetics with ribbons</p>
+                        <p class="text-sm text-charcoal font-medium">Rs. 6,000</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[3/4] overflow-hidden relative mb-4">
+                        <img src="images/img5.jpg" alt="Anniversary Gift Box" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <button class="w-full bg-white/90 backdrop-blur text-charcoal text-xs uppercase tracking-widest py-3 hover:bg-charcoal hover:text-white transition-colors">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="font-serif text-sm md:text-base text-charcoal mb-1">Anniversary Gift Box</h3>
+                        <p class="text-xs text-gray-500 font-light mb-2">Customized gifts inside</p>
+                        <p class="text-sm text-charcoal font-medium">Rs. 9,500</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Order Section -->
+    <section id="custom-order" class="py-24 px-6 max-w-7xl mx-auto reveal">
+        <!-- Center Aligned Info -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl text-charcoal mb-6 leading-tight">Bring Your Vision <br><span class="text-gold italic">to Life</span></h2>
+            <p class="font-light text-gray-600 mb-10 leading-relaxed text-sm md:text-base mx-auto max-w-xl">
+                Have a specific design in mind? Whether it’s a Pinterest reference or a unique idea for your loved ones, we craft customized gifts perfectly tailored to your aesthetic. Fill out the form below to start your bespoke order.
+            </p>
+
+            <!-- Advance Payment Plaque -->
+            <div class="bg-blush-50 p-6 border border-blush-200 rounded-sm relative overflow-hidden inline-block text-left max-w-xl mx-auto w-full">
+                <div class="absolute top-0 left-0 w-1 h-full bg-gold"></div>
+                <h3 class="font-serif text-xl text-charcoal mb-3 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-gold"></i>
+                    Secure Your Order
+                </h3>
+                <p class="text-sm font-light text-gray-600 mb-4">
+                    To confirm your custom creation, an advance payment is required. Please transfer the amount and attach the screenshot in the form.
+                </p>
+                
+                <div class="bg-white p-4 border border-gray-100 shadow-sm flex items-start gap-4">
+                    <div class="p-3 bg-green-50 text-green-600 rounded-full shrink-0">
+                        <i data-lucide="smartphone" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs tracking-widest uppercase text-gray-500 mb-1">Easypaisa Details</p>
+                        <p class="font-serif text-lg text-charcoal">Art & Craft</p>
+                        <p class="font-mono text-charcoal font-medium tracking-wider">0300-1234567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centered Card Form -->
+        <div class="bg-white p-8 md:p-10 shadow-lg rounded-lg border border-gray-100 max-w-[600px] mx-auto">
+            <form class="space-y-4">
+                <!-- Full Name -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Full Name</label>
+                    <input type="text" class="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-transparent" placeholder="Enter your full name" required>
+                </div>
+                
+                <!-- Phone Number -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Phone Number</label>
+                    <input type="tel" class="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-transparent" placeholder="Enter your phone number (e.g. 03XX-XXXXXXX)" required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Email Address</label>
+                    <input type="email" class="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-transparent" placeholder="Enter your email address" required>
+                </div>
+                
+                <!-- Instagram ID -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Instagram ID <span class="text-gray-400 font-normal text-xs">(Optional)</span></label>
+                    <input type="text" class="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-transparent" placeholder="Enter your Instagram @username">
+                </div>
+
+                <!-- Full Address -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Delivery Address</label>
+                    <input type="text" class="w-full border border-gray-200 rounded px-4 py-2 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-transparent" placeholder="Enter House/Apt, Street, Area, City" required>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                    <label class="block text-sm font-bold text-gray-800 mb-1 flex justify-between items-center">
+                        <span>Gift Details & Customization</span>
+                        <span class="text-[10px] font-normal text-gray-400">Max 1000 words</span>
+                    </label>
+                    <textarea rows="4" class="w-full border border-gray-200 rounded px-4 py-3 focus:outline-none focus:border-gold transition-colors font-light text-sm bg-gray-50/50 resize-none" placeholder="Describe the items you want, the color theme, and any custom message..." required></textarea>
+                </div>
+
+                <!-- File Uploads -->
+                <div class="space-y-4 pt-4 border-t border-gray-100">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
+                            <i data-lucide="image" class="w-4 h-4"></i> Reference Image <span class="text-gray-400 font-normal text-xs">(Optional)</span>
+                        </label>
+                        <input type="file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-bold file:rounded file:bg-blush-50 file:text-charcoal hover:file:bg-blush-100 transition-all">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-gray-800 mb-2 flex items-center gap-2">
+                            <i data-lucide="receipt" class="w-4 h-4"></i> Advance Payment Screenshot *
+                        </label>
+                        <input type="file" accept="image/*" required class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-xs file:font-bold file:rounded file:bg-gray-100 file:text-charcoal hover:file:bg-gray-200 transition-all">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-[#4a2c2a] text-white text-sm font-bold tracking-widest uppercase py-4 mt-6 rounded hover:bg-[#633a38] transition-colors duration-300 flex items-center justify-center gap-2 group shadow-md">
+                    Submit Order Request
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-blush-100 reveal">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="block text-xs tracking-widest uppercase text-gold mb-4">Customer Love</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-charcoal mb-16">Words from our beautiful clients</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 shadow-sm flex flex-col items-center text-center">
+                    <div class="flex text-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-serif text-lg text-charcoal italic mb-6">"Packaging bohat pretty thi ✨ my sister completely loved her customized birthday box. Thank you for making it so aesthetic!"</p>
+                    <p class="text-xs uppercase tracking-widest text-gray-500 font-medium">— Ayesha M.</p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 shadow-sm flex flex-col items-center text-center transform md:-translate-y-4">
+                    <div class="flex text-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-serif text-lg text-charcoal italic mb-6">"Exactly same as picture, loved it 💖 the roses were fresh and the perfume selection was premium. Best gifting page in Pak!"</p>
+                    <p class="text-xs uppercase tracking-widest text-gray-500 font-medium">— Zainab K.</p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 shadow-sm flex flex-col items-center text-center">
+                    <div class="flex text-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="font-serif text-lg text-charcoal italic mb-6">"Ordered a last-minute anniversary hamper and they delivered the most elegant setup. Customer service is 10/10."</p>
+                    <p class="text-xs uppercase tracking-widest text-gray-500 font-medium">— Fatima S.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-[#2a2a2a] text-cream pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            
+            <!-- Brand -->
+            <div class="md:col-span-1">
+                <h3 class="font-serif text-3xl mb-6">Art & Craft</h3>
+                <p class="font-light text-gray-400 text-sm mb-6 leading-relaxed">
+                    Elevating the art of gifting in Pakistan. Premium boxes, elegant bouquets, and memories packed with love.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-gray-300 font-medium mb-6">Explore</h4>
+                <ul class="space-y-3 font-light text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-cream transition-colors">Home</a></li>
+                    <li><a href="#shop" class="hover:text-cream transition-colors">Shop All</a></li>
+                    <li><a href="#categories" class="hover:text-cream transition-colors">Categories</a></li>
+                    <li><a href="#custom-order" class="hover:text-cream transition-colors">Custom Orders</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Care -->
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-gray-300 font-medium mb-6">Customer Care</h4>
+                <ul class="space-y-3 font-light text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-cream transition-colors">Track Order</a></li>
+                    <li><a href="#" class="hover:text-cream transition-colors">Shipping Policy</a></li>
+                    <li><a href="#" class="hover:text-cream transition-colors">FAQs</a></li>
+                    <li><a href="#" class="hover:text-cream transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact / Newsletter -->
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-gray-300 font-medium mb-6">Stay Connected</h4>
+                <p class="font-light text-gray-400 text-sm mb-4">
+                    Follow us on Instagram <a href="#" class="text-gold hover:underline">@art&craft.pk</a> for daily aesthetic gifting ideas.
+                </p>
+                <div class="border-b border-gray-600 flex items-center py-2 mt-4">
+                    <input type="email" placeholder="Enter your email" class="bg-transparent border-none w-full text-sm font-light focus:outline-none text-cream placeholder-gray-500">
+                    <button class="text-gold hover:text-white transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-gray-500">
+            <p>&copy; 2026 Art & Craft Gifting. All rights reserved.</p>
+            <p class="mt-4 md:mt-0">Designed with elegance <br> by Ateeb Jilani.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-sm');
+            } else {
+                navbar.classList.remove('shadow-sm');
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+    </script>
+</body>
+</html>
